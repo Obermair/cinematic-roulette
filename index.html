@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>CinematicRoulette</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" title="style">
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo.png" />
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <!-- SCROLL -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/scrolloverflow.js"></script>
+    <script type="text/javascript" src="js/jquery.fullPage.js"></script>
+    <script type="text/javascript" src="js/examples.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="css/examples.css" />
+
+    <!-- Slide -->
+    <link rel="stylesheet" type="text/css" href="css/style2.css" />
+    <script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
+
+    <!-- Button -->
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/buttons.css" />
+
+    <!-- TheMovieDB -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script type="text/javascript" src="js/themoviedb.js"></script>
+
+    <!-- Carousel -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    
+
+</head>
+
+<body ng-app="moviesApp" ng-controller="searchMoviesCtrl">
+    <!-- Cursor -->
+    <img id="cursor" style="pointer-events: none" draggable="false" src="images/logo.png" alt="LOGO">
+    
+    <!-- Navbar -->
+    <div id="navbar-out">
+
+        <div id="navbar-left">
+            <img id="logopic" src="logo/logo2.jpg" width="281.5vw" height="88.75vh" alt="logoCR">
+        </div>
+        <div id="navbar-in">
+            <a class="link" href="#firstPage">
+                <div id="first" class="list-item"> Home</div>
+            </a>
+            <a class="link" href="#secondPage">
+                <div id="second" class="list-item">Popular</div>
+            </a>
+            <a class="link" href="#3rdPage">
+                <div id="third" class="list-item">Genres</div>
+            </a>
+            <a class="link" href="#4thPage">
+                <div id="4th" class="list-item">Random</div>
+            </a>
+            <a class="link" href="#5thPage">
+                <div id="5th" class="list-item">Movie Calculator</div>
+            </a>
+
+            <img name="test" id="icon" onclick="menuHideMove()"src="images/shop.svg" alt="Shopping Icon">
+            <div class="menu-hide">
+                <div id="hide-over">
+                    <h2 id="watchlist">Watchlist</h2>
+                </div>
+                <img class="leftside transform" onclick="menuHideLeft()" src="images/left.svg" alt="Left Icon">
+                <div id="watchText"></div>
+            </div>
+            <a href="#secondPage"><form id="searchbutton">
+                <input class="search" ng-model="search" type="text" />
+                <div class="after" ng-click="myPopular()"></div>
+                <input class="search" type="submit" /></a>
+            </form>
+            <h4>&nbsp;</h4>
+        </div>
+
+    </div>
+
+    <div id="fullpage">
+
+        <div class="section " id="section0">
+
+            <div id="backwrite">
+                <h3 id="thirdWriting">New Movie</h3>
+                <h1 id="importantWriting">Watch
+                    <br> your
+                    <br> Movie</h1>
+                <a href="#secondPage">
+                    <button id="buttonWrite" class="button button--nina button--size-m" data-text="Look now">
+                        <span>L</span>
+                        <span>o</span>
+                        <span>o</span>
+                        <span>k</span>
+                        <span>&nbsp</span>
+                        <span>n</span>
+                        <span>o</span>
+                        <span>w</span>
+                    </button>
+                </a>
+            </div>
+
+            <ul class="cb-slideshow">
+                <li>
+                    <span>Image 01</span>
+                </li>
+                <li>
+                    <span>Image 02</span>
+                </li>
+                <li>
+                    <span>Image 03</span>
+                </li>
+                <li>
+                    <span>Image 04</span>
+                </li>
+                <li>
+                    <span>Image 05</span>
+                </li>
+                <li>
+                    <span>Image 06</span>
+                </li>
+                <li>
+                    <span>Image 07</span>
+                </li>
+                <li>
+                    <span>Image 08</span>
+                </li>
+                <li>
+                    <span>Image 09</span>
+                </li>
+                <li>
+                    <span>Image 10</span>
+                </li>
+            </ul>
+        </div>
+
+       <div class="section" id="section1">
+
+
+            <div id="top" class="container">
+                <div id="overp2">
+                <h1 class="pop-import">Most Popular</h1>
+                </div>
+                <br>
+                <div class="underline"></div>
+                <br>
+                 
+                <div class="row">
+                   
+
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" ng-repeat="movie in listOfMovies | filter: title | orderBy: '-overview' | limitTo:'1'">
+
+
+                                <div class="movie-box" id="movie-card">
+
+
+                                    <img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" />
+
+                                    <img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" />
+
+                                    <div class="box-content">
+                                        <h1 id="movT" class="movie-title">{{movie.title}}</h1>
+                                        <p class="movie-under">{{movie.release_date | date:'yyyy' }}</p>
+                                        <p class="movie-undernow">{{movie.vote_average }}</p>
+                                        <br>
+                                        <br>
+                                        <p class="movie-text">{{movie.overview}}</p>
+                                        <button class="watchlistButton" ng-click="getTitle()">Add to Watchlist</button>
+                                        <div id="wat"></div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="carousel-item" ng-repeat="movie in listOfMovies | filter: title | orderBy: '-vote_average' | limitTo:'28'">
+
+
+                                <div class="movie-box" id="movie-card">
+
+
+                                    <img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" />
+
+                                    <img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" />
+
+                                    <div class="box-content">
+                                        <h1 id="movT2" class="movie-title">{{movie.title}}</h1>
+                                        <p class="movie-under">{{movie.release_date | date:'yyyy' }}</p>
+                                        <p class="movie-undernow">{{movie.vote_average }}</p>
+                                        <br>
+                                        <br>
+                                        <p class="movie-text">{{movie.overview}}</p>
+                                        <button class="watchlistButton" ng-click="getTitle2()">Add to Watchlist</button>
+                                        <div id="wat"></div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+       
+        </div>
+
+
+        <div class="section " id="section2">
+            <div id="flop" ng-controller="searchGenreCtrl" >
+                <h1 id="genreBack" class="pop-import">Genres</h1>
+                <br>
+                <div class="underline"></div>
+                <br>
+                <div id="containerp3">
+                <div ng-click="myAction()" class="box first">
+                    <span class="icon-cont"><img class="p3images" src="images/action.png" alt="actionLogo"></span>
+                    <h3>Action</h3>
+                </div>
+                <div ng-click="myRomance()"  class="box first">
+                    <span class="icon-cont"><img class="p3images" src="images/romance.png" alt="actionLogo"></span>
+                    <h3>Romance</h3>
+                </div>
+                <div ng-click="myDrama()"  class="box first">
+                    <span class="icon-cont"><img id="drama" class="p3images" src="images/drama.png" alt="actionLogo"></span>
+                    <h3>Drama</h3>
+                </div>
+                <div ng-click="myCrime()"  class="box first">
+                    <span class="icon-cont"><img class="p3images" src="images/crime.png" alt="actionLogo"></span>
+                    <h3>Crime</h3>
+                </div>
+                <div ng-click="myHorror()"  class="box first">
+                    <span class="icon-cont"><img class="p3images" src="images/horror.png" alt="actionLogo"></span>
+                    <h3>Horror</h3>
+                </div>
+                <div ng-click="mySci()"  class="box first">
+                    <span class="icon-cont"><img class="p3images" src="images/sci.png" alt="actionLogo"></span>
+                    <h3>Sci-Fi</h3>
+                </div>
+                <div ng-click="myWestern()" class="box first">
+                    <span class="icon-cont"><img id="western" class="p3images" src="images/western.png" alt="actionLogo"></span>
+                    <h3>Western</h3>
+                </div>
+
+                <div ng-click="myThriller()" class="box first">
+                    <span class="icon-cont"><img class="p3images" src="images/thriller.png" alt="actionLogo"></span>
+                    <h3>Thriller</h3>
+                </div>
+                <div ng-click="myComedy()" class="box first">
+                    <span class="icon-cont"><img class="p3images" src="images/comedy.png" alt="actionLogo"></span>
+                    <h3>Comedy</h3>
+                </div>
+                <div ng-click="myFamily()" class="box first">
+                    <span class="icon-cont"><img class="p3images" src="images/family.png" alt="actionLogo"></span>
+                    <h3>Family</h3>
+                </div>
+                
+               
+
+            </div>
+
+            <div id="top2" class="container"><div class="row"><div id="carouselExampleControls2" class="carousel slide" data-ride="carousel"><div class="carousel-inner"><div class="carousel-item active" ng-repeat="movie in listOfMovies | filter: title | orderBy: '-overview' | limitTo: '1'"> <div class="movie-box" id="movie-card"><img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" /><img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" /><div class="box-content"><h1 id="movT3" class="movie-title">{{movie.title}}</h1><p class="movie-under">{{movie.release_date | date: 'yyyy' }}</p><p class="movie-undernow">{{movie.vote_average }}</p> <br><br><p class="movie-text">{{movie.overview}}</p> <button class="watchlistButton" ng-click="getTitle3()">Add to Watchlist</button></div></div></div><div class="carousel-item" ng-repeat="movie in listOfMovies | filter: title | orderBy: '-vote_average' | limitTo: '28'"><div class="movie-box" id="movie-card"><img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" /><img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" /><div class="box-content"><h1 id="movT4"class="movie-title">{{movie.title}}</h1> <p class="movie-under">{{movie.release_date | date:'yyyy'}}</p> <p class="movie-undernow">{{movie.vote_average }}</p><br> <br><p class="movie-text">{{movie.overview}}</p> <button class="watchlistButton" ng-click="getTitle4()">Add to Watchlist</button>
+            </div></div> </div></div><a class="carousel-control-prev" href="#carouselExampleControls2" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carouselExampleControls2" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div></div></div>   
+           
+            <div id="buttonBack"></div>
+            </div>
+        </div>
+        <div class="section " id="section3">
+            <div id="plop">
+            <h1 id="white">Random</h1>
+            <br>
+            <div id="white-underline"></div>
+            <br>
+            <p class="describe">Use the CinematicRoulette randomizer below to find something to watch.</p>
+            <button id="buttonMiddle" class="button button--nina button--size-m" data-text="SPIN">
+                <span>S</span>
+                <span>P</span>
+                <span>I</span>
+                <span>N</span>
+            </button>
+
+
+            <div class="wheel">
+                <svg viewBox="7 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <path d="M30.3165954,31.1497476 L34.0920805,35.2455313 C34.9055075,34.4950368 35.6545931,33.6778526 36.3355799,32.8038412 L31.9378138,29.3852872 C31.4456247,30.0164916 30.9041227,30.607776 30.3165954,31.1497476 L30.3165954,31.1497476 Z"
+                            id="path-1"></path>
+                        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="6.0189845" height="5.86024411"
+                            fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <path d="M40.5769539,20.4709345 L35.0027243,20.4732827 L35.0027243,20.4765702 C35.0027243,21.289058 34.9322774,22.0851081 34.8035943,22.8623724 L40.3012717,23.7772431 C40.4797372,22.7026928 40.5769539,21.600903 40.5769539,20.4765702 L40.5769539,20.4709345 L40.5769539,20.4709345 Z"
+                            id="path-3"></path>
+                        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="5.77335958" height="3.30630859"
+                            fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <path d="M33.2532925,27.3822466 L38.1563979,30.0315203 C38.6809926,29.0645189 39.1243385,28.0472655 39.4864357,26.9929099 L34.2146581,25.1857117 C33.9525956,25.9479474 33.6327666,26.6824739 33.2532925,27.3822466 L33.2532925,27.3822466 Z"
+                            id="path-5"></path>
+                        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="6.23314312" height="4.84580852"
+                            fill="white">
+                            <use xlink:href="#path-5"></use>
+                        </mask>
+                        <path d="M9.02941604,29.4026641 L4.63634636,32.8268539 C5.31874215,33.7008653 6.06970628,34.5185192 6.88454227,35.2680743 L10.6543916,31.1666549 C10.0654553,30.6251529 9.52301409,30.0338685 9.02941604,29.4026641 L9.02941604,29.4026641 Z"
+                            id="path-7"></path>
+                        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="6.0180452" height="5.86541022"
+                            fill="white">
+                            <use xlink:href="#path-7"></use>
+                        </mask>
+                        <path d="M9.5046979,37.3044599 C10.4275525,37.9084247 11.4025378,38.4381856 12.4216699,38.8857583 L14.656246,33.7816444 C13.9193713,33.4575886 13.2149021,33.074827 12.5480047,32.6385258 L9.5046979,37.3044599 L9.5046979,37.3044599 Z"
+                            id="path-9"></path>
+                        <mask id="mask-10" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="5.15154814" height="6.2472325"
+                            fill="white">
+                            <use xlink:href="#path-9"></use>
+                        </mask>
+                        <path d="M6.74458773,25.2030886 L1.47421913,27.015453 C1.83866451,28.0702781 2.28294972,29.0875316 2.80942301,30.0554722 L7.70924083,27.4000931 C7.32882749,26.7003204 7.00758955,25.9653243 6.74458773,25.2030886 L6.74458773,25.2030886 Z"
+                            id="path-11"></path>
+                        <mask id="mask-12" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="6.2350217" height="4.85238357"
+                            fill="white">
+                            <use xlink:href="#path-11"></use>
+                        </mask>
+                        <path d="M20.4765702,5.95041616 C20.8814052,5.95041616 21.2815437,5.97155024 21.677925,6.00395582 L22.1386478,0.448981677 C21.5896315,0.403426005 21.036858,0.374777593 20.4765702,0.374777593 C19.9176914,0.374777593 19.3663268,0.403426005 18.8187195,0.448512031 L19.2794423,6.00348617 C19.6744147,5.97155024 20.0731442,5.95041616 20.4765702,5.95041616 L20.4765702,5.95041616 Z"
+                            id="path-13"></path>
+                        <mask id="mask-14" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="3.31992832" height="5.62917823"
+                            fill="white">
+                            <use xlink:href="#path-13"></use>
+                        </mask>
+                        <path d="M28.5511957,2.0739572 C27.5452138,1.63061128 26.4974333,1.26475696 25.4130204,0.989544346 L24.0444717,6.39517103 C24.8278414,6.59383133 25.5853806,6.85777244 26.3128624,7.17854073 L28.5511957,2.0739572 L28.5511957,2.0739572 Z"
+                            id="path-15"></path>
+                        <mask id="mask-16" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="4.50672403" height="6.18899639"
+                            fill="white">
+                            <use xlink:href="#path-15"></use>
+                        </mask>
+                        <path d="M34.8021854,18.0837233 L40.2993931,17.1646259 C40.1152918,16.059079 39.8400792,14.985468 39.4831481,13.9484894 L34.2123099,15.7594447 C34.4701456,16.5089999 34.6692756,17.2853249 34.8021854,18.0837233 L34.8021854,18.0837233 Z"
+                            id="path-17"></path>
+                        <mask id="mask-18" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="6.08708318" height="4.13523396"
+                            fill="white">
+                            <use xlink:href="#path-17"></use>
+                        </mask>
+                        <path d="M30.3100204,9.79634813 L34.0831572,5.69727691 C33.2701998,4.94772173 32.3947795,4.26673487 31.4672284,3.65854317 L28.4196948,8.32353794 C29.0898798,8.76312669 29.7224931,9.25531581 30.3100204,9.79634813 L30.3100204,9.79634813 Z"
+                            id="path-19"></path>
+                        <mask id="mask-20" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="5.66346239" height="6.13780496"
+                            fill="white">
+                            <use xlink:href="#path-19"></use>
+                        </mask>
+                        <path d="M33.250005,13.5643188 L38.1512318,10.909879 C37.6210013,9.93348479 37.0076435,9.0096909 36.3285352,8.13896702 L31.9326477,11.5612782 C32.4234279,12.190604 32.8667738,12.8584407 33.250005,13.5643188 L33.250005,13.5643188 Z"
+                            id="path-21"></path>
+                        <mask id="mask-22" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="6.21858409" height="5.42535182"
+                            fill="white">
+                            <use xlink:href="#path-21"></use>
+                        </mask>
+                        <path d="M16.9114866,6.39423173 L15.5419986,0.989074699 C14.4580554,1.26381767 13.4102749,1.62967199 12.4038233,2.07301791 L14.6430959,7.17713179 C15.3705778,6.85683315 16.1281169,6.59289204 16.9114866,6.39423173 L16.9114866,6.39423173 Z"
+                            id="path-23"></path>
+                        <mask id="mask-24" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="4.50766333" height="6.18805709"
+                            fill="white">
+                            <use xlink:href="#path-23"></use>
+                        </mask>
+                        <path d="M12.5353242,8.32259865 L9.4863817,3.65807352 C8.55789135,4.26720452 7.68200136,4.94866102 6.8685743,5.69868585 L10.6426504,9.79681777 C11.2306473,9.25531581 11.8637303,8.76265705 12.5353242,8.32259865 L12.5353242,8.32259865 Z"
+                            id="path-25"></path>
+                        <mask id="mask-26" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="5.66674992" height="6.13874425"
+                            fill="white">
+                            <use xlink:href="#path-25"></use>
+                        </mask>
+                        <path d="M5.95088581,20.4850239 L0.376656177,20.4873721 C0.377125823,21.6149924 0.475751505,22.7200697 0.655625964,23.7974378 L6.15283364,22.8769315 C6.02227202,22.0982582 5.95135546,21.2998598 5.95088581,20.4850239 L5.95088581,20.4850239 Z"
+                            id="path-27"></path>
+                        <mask id="mask-28" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="5.77617746" height="3.31241399"
+                            fill="white">
+                            <use xlink:href="#path-27"></use>
+                        </mask>
+                        <path d="M6.73848233,15.7664894 L1.46670479,13.9592912 C1.10977375,14.9967395 0.835030777,16.0717594 0.651399149,17.177776 L6.14954611,18.0926466 C6.28198632,17.2933089 6.48111626,16.5165143 6.73848233,15.7664894 L6.73848233,15.7664894 Z"
+                            id="path-29"></path>
+                        <mask id="mask-30" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="6.08708318" height="4.13335538"
+                            fill="white">
+                            <use xlink:href="#path-29"></use>
+                        </mask>
+                        <path d="M7.70172649,13.568076 L2.79862115,10.9164541 C3.32932125,9.93912054 3.94267906,9.01344807 4.62225698,8.14225454 L9.01955347,11.5626871 C8.52830364,12.1929522 8.08495772,12.8617283 7.70172649,13.568076 L7.70172649,13.568076 Z"
+                            id="path-31"></path>
+                        <mask id="mask-32" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="6.22093232" height="5.42582146"
+                            fill="white">
+                            <use xlink:href="#path-31"></use>
+                        </mask>
+                        <path d="M26.3217857,33.7699033 L28.5638762,38.8711993 C29.5815993,38.4217479 30.5556453,37.8910478 31.4775606,37.2861437 L28.4272092,32.6244364 C27.761251,33.0616769 27.0572515,33.4453778 26.3217857,33.7699033 L26.3217857,33.7699033 Z"
+                            id="path-33"></path>
+                        <mask id="mask-34" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="5.15577495" height="6.24676286"
+                            fill="white">
+                            <use xlink:href="#path-33"></use>
+                        </mask>
+                        <path d="M21.6901358,34.9477757 L22.1546158,40.5004016 C23.2737824,40.4074117 24.3680579,40.2265979 25.4285188,39.9570211 L24.0557432,34.5551515 C23.2897504,34.7500547 22.4988664,34.8801467 21.6901358,34.9477757 L21.6901358,34.9477757 Z"
+                            id="path-35"></path>
+                        <mask id="mask-36" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="3.738383" height="5.94525006"
+                            fill="white">
+                            <use xlink:href="#path-35"></use>
+                        </mask>
+                        <path d="M15.5607844,39.9654747 C16.621715,40.233173 17.7164601,40.4121081 18.8360964,40.5032195 L19.2916531,34.9501239 C18.4824529,34.8839038 17.6915688,34.7547511 16.9251064,34.5617266 L15.5607844,39.9654747 L15.5607844,39.9654747 Z"
+                            id="path-37"></path>
+                        <mask id="mask-38" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="3.73086867" height="5.94149289"
+                            fill="white">
+                            <use xlink:href="#path-37"></use>
+                        </mask>
+                        <path d="M25,50 C11.2151376,50 0,38.7848624 0,25 C0,11.2146789 11.2151376,0 25,0 C38.7848624,0 50,11.2146789 50,25 C50,38.7848624 38.7848624,50 25,50 Z M34.4837473,25.0002472 C34.4837473,19.7624485 30.2375515,15.5172414 25.0002472,15.5172414 C19.7639315,15.5172414 15.5172414,19.7624485 15.5172414,25.0002472 C15.5172414,30.2360685 19.7639315,34.4827586 25.0002472,34.4827586 C30.2375515,34.4827586 34.4837473,30.2360685 34.4837473,25.0002472 L34.4837473,25.0002472 Z"
+                            id="path-39"></path>
+                        <mask id="mask-40" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="50" height="50" fill="white">
+                            <use xlink:href="#path-39"></use>
+                        </mask>
+                        <path d="M30.9641344,27.1702121 C30.7462244,27.7692782 30.0825104,28.0805321 29.4817386,27.8617427 C29.0259507,27.6954802 28.7390214,27.272227 28.7220921,26.8155476 L27.191947,26.2585898 C26.7552588,27.0247866 25.9326702,27.5422408 24.988104,27.5422408 C24.8387793,27.5422408 24.6933612,27.5270471 24.5509818,27.5023031 L23.9992614,29.019503 C24.3382807,29.3251136 24.4780557,29.8156532 24.3118016,30.2723325 C24.0938916,30.8713986 23.4293095,31.1830866 22.8289717,30.9647314 C22.2286339,30.745942 21.9191322,30.0804578 22.1370423,29.4809576 C22.3032963,29.02341 22.7265279,28.7377683 23.1836181,28.7217064 L23.7340362,27.2088475 C22.9683126,26.772137 22.4513189,25.9495064 22.4513189,25.0053262 C22.4513189,24.8490481 22.46738,24.6975451 22.4942932,24.5490809 L20.9802092,23.9977665 C20.6741802,24.3368032 20.1827974,24.4765853 19.7270095,24.3111909 C19.1266718,24.0919675 18.8171701,23.4277855 19.0355142,22.8282853 C19.2538583,22.2270487 19.9175723,21.9188335 20.51791,22.1367547 C20.974132,22.3030172 21.2610613,22.7254022 21.2775565,23.1825157 L22.7946791,23.7346983 C23.2335377,22.9784859 24.0504832,22.4679775 24.988104,22.4679775 C25.1439401,22.4679775 25.2958694,22.4840394 25.4438919,22.5109539 L26.0012554,20.9794285 C25.661802,20.6733838 25.5215929,20.1824101 25.6874129,19.7257308 C25.9061911,19.1253624 26.5699051,18.8175813 27.1706769,19.0355024 C27.7705806,19.2542918 28.0809505,19.9171714 27.8626064,20.5175398 C27.6963523,20.9737851 27.2735548,21.2598609 26.8173328,21.2763569 L26.2586671,22.8113552 C27.015275,23.2506703 27.5253233,24.0672234 27.5253233,25.0053262 C27.5253233,25.1542245 27.5096963,25.29965 27.4849535,25.4416026 L29.0185713,26.0002968 C29.3250344,25.660826 29.8164171,25.5219122 30.2730732,25.6877406 C30.8729769,25.9065299 31.1833467,26.5694096 30.9641344,27.1702121 L30.9641344,27.1702121 Z"
+                            id="path-41"></path>
+                        <mask id="mask-42" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="14.0689655" height="14.0689655">
+                            <rect x="17.9655172" y="17.9655172" width="14.0689655" height="14.0689655" fill="white"></rect>
+                            <use xlink:href="#path-41" fill="black"></use>
+                        </mask>
+                    </defs>
+                    <g id="Roulette" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(7.000000, 0.000000)">
+                        <g id="Group-41" transform="translate(4.310345, 4.310345)" stroke="#E8E8E8" stroke-width="2">
+                            <use id="Path" mask="url(#mask-2)" xlink:href="#path-1"></use>
+                            <use id="Path" mask="url(#mask-4)" xlink:href="#path-3"></use>
+                            <use id="Path" mask="url(#mask-6)" xlink:href="#path-5"></use>
+                            <use id="Path" mask="url(#mask-8)" xlink:href="#path-7"></use>
+                            <use id="Path" mask="url(#mask-10)" xlink:href="#path-9"></use>
+                            <use id="Path" mask="url(#mask-12)" xlink:href="#path-11"></use>
+                            <use id="Path" mask="url(#mask-14)" xlink:href="#path-13"></use>
+                            <use id="Path" mask="url(#mask-16)" xlink:href="#path-15"></use>
+                            <use id="Path" mask="url(#mask-18)" xlink:href="#path-17"></use>
+                            <use id="Path" mask="url(#mask-20)" xlink:href="#path-19"></use>
+                            <use id="Path" mask="url(#mask-22)" xlink:href="#path-21"></use>
+                            <use id="Path" mask="url(#mask-24)" xlink:href="#path-23"></use>
+                            <use id="Path" mask="url(#mask-26)" xlink:href="#path-25"></use>
+                            <use id="Path" mask="url(#mask-28)" xlink:href="#path-27"></use>
+                            <use id="Path" mask="url(#mask-30)" xlink:href="#path-29"></use>
+                            <use id="Path" mask="url(#mask-32)" xlink:href="#path-31"></use>
+                            <use id="Path" mask="url(#mask-34)" xlink:href="#path-33"></use>
+                            <use id="Path" mask="url(#mask-36)" xlink:href="#path-35"></use>
+                            <use id="Path" mask="url(#mask-38)" xlink:href="#path-37"></use>
+                        </g>
+                        <use id="Fill-36" stroke="#E8E8E8" mask="url(#mask-40)" stroke-width="2" xlink:href="#path-39"></use>
+                        <use id="Path" stroke="#E8E8E8" mask="url(#mask-42)" stroke-width="2" xlink:href="#path-41"></use>
+                    </g>
+                </svg>
+                <div class="ball"></div>
+            </div>
+
+            <div ng-click="makeid();" id="snap" class="container" ng-controller="searchRandomCtrl">
+
+
+                <div ng-repeat="movie in listOfMovies | filter: title | orderBy: '-overview' | limitTo:'1'">
+
+
+                    <div class="movie-box" id="movie-card">
+
+
+                        <img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" />
+
+                        <img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" />
+
+                        <div class="box-content">
+                            <h1 id="movT5" class="movie-title">{{movie.title}}</h1>
+                            <p class="movie-under">{{movie.release_date | date:'yyyy' }}</p>
+                            <p class="movie-undernow">{{movie.vote_average }}</p>
+                            <br>
+                            <br>
+                            <p class="movie-text">{{movie.overview}}</p>
+                            <button class="watchlistButton" ng-click="getTitle5()">Add to Watchlist</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+        <div class="section " id="section4">
+  
+            <div id="slop">             
+                <br>
+            <h1 class="pop-import" id="ausn">Movie Calculator</h1>
+
+            <br>
+            <div class="underline"></div>
+            <br>
+            <p class="describeBlack">Use the CinematicRoulette Movie Calculator below to find something to watch.</p>
+            <div id="wrap">
+                <div class="mat-div">
+                    <label for="favourite" class="mat-label">Enter your favourite movie</label>
+                    <input autocomplete="off" type="text" class="mat-input" id="favourite">
+                </div>
+            </div>
+            <br>
+            <div ng-controller="searchActionCtrl">
+            <div id="slapp">
+            </div>
+
+            
+            <div id="innerButton">
+            <button onclick="startCalculating()" id="buttonCalc" class="button button--nina button--size-m" data-text="START">
+                <span>S</span>
+                <span>T</span>
+                <span>A</span>
+                <span>R</span>
+                <span>T</span>
+            </button>
+            </div>
+            <div id="barOut">
+            <div id="bar">
+                <div></div>
+            </div>
+            </div>
+            <button ng-click="myFunction()" id="buttonCalc3" class="button button--nina button--size-m" data-text="CONTINUE"><span>C</span><span>O</span><span>N</span><span>T</span><span>I</span><span>N</span><span>U</span><span>E</span></button> 
+            <div id="top1" class="container"><div class="row"><div id="carouselExampleControls1" class="carousel slide" data-ride="carousel"><div class="carousel-inner"><div class="carousel-item active" ng-repeat="movie in listOfMovies | filter: title | orderBy: '-overview' | limitTo: '1'"> <div class="movie-box" id="movie-card"><img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" /><img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" /><div class="box-content"><h1 id="movT6" class="movie-title">{{movie.title}}</h1><p class="movie-under">{{movie.release_date | date: 'yyyy' }}</p><p class="movie-undernow">{{movie.vote_average }}</p> <br><br><p class="movie-text">{{movie.overview}}</p><button class="watchlistButton" ng-click="getTitle6()">Add to Watchlist</button></div></div></div><div class="carousel-item" ng-repeat="movie in listOfMovies | filter: title | orderBy: '-vote_average' | limitTo: '28'"><div class="movie-box" id="movie-card"><img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" /><img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" /><div class="box-content"><h1 id="movT7" class="movie-title">{{movie.title}}</h1> <p class="movie-under">{{movie.release_date | date:'yyyy'}}</p> <p class="movie-undernow">{{movie.vote_average }}</p><br> <br><p class="movie-text">{{movie.overview}}</p><button class="watchlistButton" ng-click="getTitle7()">Add to Watchlist</button></div></div> </div></div><a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div></div></div>   
+            </div>
+            </div>
+        
+        </div>
+    
+    </div>
+
+    <script type="text/javascript">
+    
+        var movie_array = new Array();
+        movie_array[1] = "images/v1.jpg";
+        movie_array[2] = "images/v2.jpg";
+        movie_array[3] = "images/v3.jpg";
+        movie_array[4] = "images/v4.jpg";
+        movie_array[5] = "images/v5.jpg";
+        movie_array[6] = "images/v6.jpg";
+        movie_array[7] = "images/v7.jpg";
+        movie_array[8] = "images/v8.jpg";
+        movie_array[9] = "images/v9.jpg";
+        movie_array[10] = "images/v10.jpg";
+        movie_array[11] = "images/v11.jpg";
+        movie_array[12] = "images/v12.jpg";
+        movie_array[13] = "images/v13.jpg";
+        movie_array[14] = "images/v14.jpg";
+        movie_array[15] = "images/v15.jpg";
+        movie_array[16] = "images/v16.jpg";
+        movie_array[17] = "images/v17.jpg";
+
+
+         var path = new Array();
+
+        path[1] ='<div id="pic_container"><img onclick="setPoster1(1)" class="img" id="side1"src="' + movie_array[1] +'" alt="poster"><img class="img" onclick="setPoster1(9)" id="side2" src="' + movie_array[9]+ '" alt="poster"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+        path[2] ='<div id="pic_container"><img onclick="setPoster1(2)" class="img" id="side1"src="' + movie_array[2] +'" alt="poster"><img class="img" onclick="setPoster1(10)" id="side2" src="' + movie_array[10]+ '" alt="poster"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+        path[3] ='<div id="pic_container"><img onclick="setPoster1(3)" class="img" id="side1"src="' + movie_array[3] +'" alt="poster"><img class="img" onclick="setPoster1(11)" id="side2" src="' + movie_array[11]+ '" alt="poster"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+        path[4] ='<div id="pic_container"><img onclick="setPoster1(4)" class="img" id="side1"src="' + movie_array[4] +'" alt="poster"><img class="img" onclick="setPoster1(12)" id="side2" src="' + movie_array[12]+ '" alt="poster"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+        path[5] ='<div id="pic_container"><img onclick="setPoster1(5)" class="img" id="side1"src="' + movie_array[5] +'" alt="poster"><img class="img" onclick="setPoster1(13)" id="side2" src="' + movie_array[13]+ '" alt="poster"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+        path[6] ='<div id="pic_container"><img onclick="setPoster1(6)" class="img" id="side1"src="' + movie_array[6] +'" alt="poster"><img class="img" onclick="setPoster1(14)" id="side2" src="' + movie_array[14]+ '" alt="poster"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+        path[7] ='<div id="pic_container"><img onclick="setPoster1(7)" class="img" id="side1"src="' + movie_array[7] +'" alt="poster"><img class="img" onclick="setPoster1(15)" id="side2" src="' + movie_array[15]+ '" alt="poster"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+        path[8] ='<div id="pic_container"><img onclick="setPoster1(8)" class="img" id="side1"src="' + movie_array[8] +'" alt="poster"><img class="img" ng-click="myFunction()" onclick="setPoster1(16)" id="side2" src="' + movie_array[16]+ '" alt="poster"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
+
+    
+		
+        if (window.innerHeight <= 720) {
+
+            document.getElementById("top").style.zoom = "80%";
+            document.getElementById("plop").style.zoom = "80%";
+            document.getElementById("flop").style.zoom = "80%";
+            document.getElementById("slop").style.zoom = "80%";
+            document.getElementById("navbar-out").style.zoom = "80%";
+        }
+        else{
+
+        
+        if (window.innerHeight <= 780) {
+
+            document.getElementById("top").style.zoom = "90%";
+            document.getElementById("plop").style.zoom = "90%";
+            document.getElementById("flop").style.zoom = "90%";
+            document.getElementById("slop").style.zoom = "90%";
+            document.getElementById("navbar-out").style.zoom = "90%";
+        }
+        }
+
+        //scroll
+        $(document).ready(function () {
+            $('#fullpage').fullpage({
+                anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage', '5thPage'],
+                sectionsColor: ['#ECEDE7', 'whitesmoke', '#DCF0F0', '#3F5159', '#C0D4D8'],
+                navigation: true,
+                navigationPosition: 'right',
+                navigationTooltips: ['Home', 'Popular', 'Genres', 'Random', 'Movie Calculator'],
+                responsiveWidth: 0,
+                afterResponsive: function (isResponsive) {
+                }
+            });
+        });
+
+
+
+        var s = $('.search'),
+            f = $('#searchbutton'),
+            a = $('.after'),
+            m = $('h4');
+
+
+        s.focus(function () {
+
+            if (f.hasClass('open')) return;
+
+            f.addClass('in');
+            setTimeout(function () {
+
+                f.addClass('open');
+                f.removeClass('in');
+            }, 1300);
+        });
+
+        a.on('click', function (e) {
+            e.preventDefault();
+            if (!f.hasClass('open')) return;
+            s.val('');
+            f.addClass('close');
+            f.removeClass('open');
+            setTimeout(function () {
+                f.removeClass('close');
+            }, 1300);
+        })
+
+        $(".search").click(function () {
+            $(".link").animate({
+                opacity: 0,
+
+            }, {
+                    duration: 1,
+
+                });
+        });
+        $(".search").click(function () {
+            $("#icon").animate({
+                opacity: 0,
+
+            }, {
+                    duration: 1,
+
+                });
+        });
+        $(".after").click(function () {
+            $(".link").animate({
+                opacity: 1,
+
+            }, {
+
+                    duration: 8000,
+                });
+        });
+        $(".after").click(function () {
+            $("#icon").animate({
+                opacity: 1,
+
+            }, {
+                    duration: 8000,
+                });
+        });
+        $("#buttonMiddle").click(function () {
+            $(".wheel").remove();
+
+        });
+        $("#buttonMiddle").click(function () {
+            $("#snap").animate({
+                opacity: 1,
+
+            }, {
+                    duration: 2500,
+
+                });
+        });
+        var margin = 0;
+
+        function menuHideLeft(){
+            if (margin == 0) {
+                margin = 345;            
+            }
+            else {
+                margin = 0;
+            }
+
+            $(".menu-hide").animate({
+                    marginLeft: margin
+                }, {
+                    duration: 100
+            });
+
+        }
+
+
+        function menuHideMove() {
+            if (margin == 0) {
+                margin = 345;            
+            }
+            else {
+                margin = 0;
+            }
+           
+            var temp = margin +"px";
+            $(".menu-hide").animate({
+                    marginLeft: temp
+                }, {
+                    duration: 100
+             });
+            
+        }
+        $("#icon").click(function() {
+            $('.transform').toggleClass('transform-active');
+        });
+        $(".leftside").click(function() {
+            $('.transform').toggleClass('transform-active');
+        });
+
+
+        
+        function getPath() {
+            var path = document.location.href;
+            var drone = true;
+            var umgekehrtPath = "";
+
+            //String umkehren
+            for (var j = path.length - 1; j >= 0; j--) {
+                umgekehrtPath += path.charAt(j);
+            }
+
+            var i = 0;
+            var newPath = "";
+
+            while (drone) {
+
+                if (umgekehrtPath.charAt(i) != '#') {
+                    newPath += umgekehrtPath.charAt(i);
+                    drone = true;
+                }
+                else {
+                    drone = false;
+                }
+
+                i++;
+            }
+            var originalPath = "";
+
+            //String umkehren
+            for (var k = newPath.length - 1; k >= 0; k--) {
+                originalPath += newPath.charAt(k);
+            }
+            return originalPath;
+        }
+        $(".mat-input").focus(function() {
+        $(this)
+            .parent()
+            .addClass("is-active is-completed");
+        });
+
+        $(".mat-input").focusout(function() {
+        if ($(this).val() === "")
+            $(this)
+            .parent()
+            .removeClass("is-completed");
+        $(this)
+            .parent()
+            .removeClass("is-active");
+        });
+        function startCalculating(){
+            var favouriteMovie = document.getElementById("favourite").value;
+            
+            document.getElementById("wrap").innerHTML = "";
+            document.getElementById("innerButton").innerHTML = "";
+
+            set(12);
+
+            document.getElementById("slapp").innerHTML = checkboxScript;
+            document.getElementById("innerButton").innerHTML = "<button onclick='setPoster1(0)' id='buttonCalc2' class='button button--nina button--size-m' data-text='CONTINUE'><span>C</span><span>O</span><span>N</span><span>T</span><span>I</span><span>N</span><span>U</span><span>E</span></button>"
+
+        }
+
+        var conste = 25;
+        var zeahler = 0;
+        var mult = 10;
+        var winner = "";
+
+        var action = 0;
+        var animation = 0;
+        var documentary = 0;
+        var drama = 0;
+        var family = 0;
+        var fantasy = 0;
+        var history = 0;
+        var comedy = 0;
+        var war = 0;
+        var crime = 0
+        var mystery = 0;
+        var romance = 0;
+        var sci = 0;
+        var horror = 0;
+        var thriller = 0;
+        var western = 0;
+        var adventure = 0;
+
+        function setPoster1(film){
+            if(zeahler == 0){
+            //punkteverteilung checkbox
+            if(document.getElementById("type1").checked){
+                action = action + 6;
+            }
+            if(document.getElementById("type2").checked){
+                animation = animation + 6;
+            }
+            if(document.getElementById("type3").checked){
+                documentary = documentary + 6;
+            }
+            if(document.getElementById("type4").checked){
+                drama = drama  + 6;
+            }
+            if(document.getElementById("type5").checked){
+                family = family + 6;
+            }
+            if(document.getElementById("type6").checked){
+                fantasy = fantasy + 6;
+            }
+            if(document.getElementById("type7").checked){
+                history = history + 6;
+            }
+            if(document.getElementById("type8").checked){
+                comedy = comedy + 6;
+            }
+            if(document.getElementById("type9").checked){
+                war = war + 6;
+            }
+            if(document.getElementById("type10").checked){
+                crime = crime + 6;
+            }
+            if(document.getElementById("type11").checked){
+                mystery = mystery + 6;
+            }
+            if(document.getElementById("type12").checked){
+                romance = romance + 6;
+            }
+            if(document.getElementById("type13").checked){
+                sci = sci + 6;
+            }
+            if(document.getElementById("type14").checked){
+                horror = horror + 6;
+            }
+            if(document.getElementById("type15").checked){
+                thriller = thriller + 6;
+            }
+            if(document.getElementById("type16").checked){
+                western = western + 6;
+            }
+            if(document.getElementById("type17").checked){
+                adventure = adventure + 6;
+            }
+            }
+
+            set(conste + (mult * zeahler));
+           
+
+            document.getElementById("slapp").innerHTML = "";
+            document.getElementById("innerButton").innerHTML = "";
+           
+            switch(film){
+                case 1:
+                    action = action + 2;
+                    adventure = adventure + 2;
+                    war = war + 1;
+                    thriller = thriller + 1;
+                    break;
+                case 2:
+                    animation = animation + 2;
+                    family = family + 1;
+                    break;
+                case 3:
+                    documentary = documentary + 2;
+                    history = history + 1;
+                    break; 
+                case 4:
+                    drama = drama + 2;
+                    action = action + 1;
+                    romance = romance + 1;
+                    break; 
+                case 5:
+                    family = family + 2;
+                    animation = animation + 1;
+                    comedy = comedy + 1;
+                    break; 
+                case 6:
+                    fantasy = fantasy + 2;
+                    sci = sci + 1;
+                    mystery = mystery + 1;
+                    break; 
+                case 7:
+                    history = history + 2;
+                    documentary = documentary + 1;
+                    break;   
+                case 8:
+                    comedy = comedy + 2;
+                    action = action + 1;
+                    fantasy = fantasy + 2;
+                    break;  
+                case 9:
+                    war = war + 2;
+                    thriller = thriller + 1;
+                    western = western + 1;
+                    break;  
+                case 10:
+                    crime = crime + 2;
+                    adventure = adventure + 2;
+                    thriller = thriller + 1;
+                    break;  
+                case 11:
+                    mystery = mystery + 2;
+                    sci = sci +2;
+                    fantasy = fantasy + 2;
+                    break;  
+                case 12:
+                    romance = romance + 3;
+                    break;  
+                case 13:
+                    sci = sci + 2;
+                    fantasy = fantasy + 1;
+                    mystery = mystery + 1;
+                    break;  
+                case 14:
+                    horror = horror + 2;
+                    thriller = thriller + 1;
+                    western = western + 1;
+                    break;  
+                case 15:
+                    thriller = thriller + 2;
+                    action = action + 1;
+                    adventure = adventure + 1;
+                    war = war + 1;
+                    western = western + 1;
+                    break;  
+                case 16:
+                    western = western + 2;
+                    thriller = thriller + 1;
+                    war = war + 1;
+                    break;  
+            }
+            
+            if(zeahler < 8){
+            zeahler++;
+           
+            document.getElementById("slapp").innerHTML += "<h5>Which poster you like more?</h5><br>";
+            document.getElementById("slapp").innerHTML += path[zeahler];
+            }
+            else{
+                
+                var sort_movies = new Array();
+                    sort_movies[0] = action;
+                    sort_movies[1] = animation;
+                    sort_movies[2] = documentary;
+                    sort_movies[3] = drama;
+                    sort_movies[4] = family;
+                    sort_movies[5] = fantasy;
+                    sort_movies[6] = history;
+                    sort_movies[7] = comedy;
+                    sort_movies[8] = war;
+                    sort_movies[9] = crime;
+                    sort_movies[10] = mystery;
+                    sort_movies[11] = romance;
+                    sort_movies[12] = sci;
+                    sort_movies[13] = horror;
+                    sort_movies[14] = thriller;
+                    sort_movies[15] = western;
+                    sort_movies[16] = adventure;
+
+
+                sort_movies.sort();
+
+                switch(sort_movies[15]){
+                        case action:
+                        winner = "action";
+                            break;
+                        case animation:
+                        winner = "animation";
+                            break;
+                        case documentary:
+                        winner = "documentary";
+                            break; 
+                        case drama:
+                        winner = "drama";
+                            break; 
+                        case family:
+                        winner = "family";
+                            break; 
+                        case fantasy:
+                        winner = "fantasy";
+                            break; 
+                        case history:
+                        winner = "history";
+                            break;   
+                        case comedy:
+                        winner = "comedy";
+                            break;  
+                        case war:
+                        winner = "war";
+                            break;  
+                        case crime:
+                        winner = "crime";
+                            break;  
+                        case mystery:
+                        winner = "mystery";
+                            break;  
+                        case romance:
+                        winner = "romance";
+                            break;  
+                        case sci:
+                        winner = "sci";
+                            break;  
+                        case horror:
+                        winner = "horror";
+                            break;  
+                        case thriller:
+                        winner = "thriller";
+                            break;  
+                        case western:
+                        winner = "western";
+                            break;  
+                        case adventure:
+                        winner = "adventure";
+                            break;  
+
+                }
+                
+                nextStep();
+            }
+        }
+        function nextStep(){
+            document.getElementById("slapp").innerHTML = "";
+            document.getElementById("barOut").innerHTML = "";
+
+            document.getElementById("slapp").innerHTML += "<h5>We found the perfect movies for you!</h5><br>";
+            document.getElementById("buttonCalc3").style.visibility = "visible";
+        }
+
+
+        var jumpsize = 10, // %
+        body = $("body");
+        (container = $("#bar")),
+        (bar = container.children("div")),
+        (topcnt = function(px) {
+            return 100 * px / container.width();
+        }),
+        (set = function(pcnt) {
+            bar.css({ width: pcnt + "%" });
+        });
+
+        body
+        .on("click", "#minus", function() {
+            set(topcnt(bar.width()) - jumpsize);
+        })
+        .on("click", "#plus", function() {
+            set(topcnt(bar.width()) + jumpsize);
+        });
+
+        set(2);
+
+        //Cursor
+        
+        $("body").mouseover(function() {
+            $(this).css({cursor: "auto" });
+        });
+
+        $(document).on("mousemove", function(e) {
+            $("#cursor").css({
+                left: e.pageX,
+                top: e.pageY,
+                transition: '0'
+            });
+        });
+        
+        var checkboxScript;
+        checkboxScript = '<div id="control-group"><h5>Select your favourite genres</h5><label class="control control--checkbox">Action<input type="checkbox" id="type1" checked="checked"/><div class="control__indicator"></div> </label><label class="control control--checkbox">Animation<input id="type2" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Documentary<input id="type3" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Drama<input id="type4" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Family<input id="type5" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Fantasy<input id="type6" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">History<input id="type7" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Comedy<input id="type8" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">War<input id="type9" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Crime<input id="type10" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Mystery<input id="type11" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Romance<input id="type12" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Sci-Fi<input id="type13" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Horror<input id="type14" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Thriller<input id="type15" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Western<input id="type16" type="checkbox"/><div class="control__indicator"></div></label><label class="control control--checkbox">Adventure<input id="type17" type="checkbox"/><div class="control__indicator"></div></label></div>'
+    
+        var actionCode = "";
+        actionCode = '<div id="top" class="container" ng-controller="searchActionCtrl"><div class="row"><div id="carouselExampleControls2" class="carousel slide" data-ride="carousel"><div class="carousel-inner"><div class="carousel-item active" ng-repeat="movie in listOfMovies | filter: title | orderBy: \u0027 -overview\u0027 | limitTo:\u0027 1 \u0027"> <div class="movie-box" id="movie-card"><img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" /><img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" /><div class="box-content"><h1 class="movie-title">{{movie.title}}</h1><p class="movie-under">{{movie.release_date | date:\u0027 yyyy \u0027 }}</p><p class="movie-undernow">{{movie.vote_average }}</p> <br><br><p class="movie-text">{{movie.overview}}</p></div></div></div><div class="carousel-item" ng-repeat="movie in listOfMovies | filter: title | orderBy: \u0027 -vote_average \u0027 | limitTo:\u0027 28 \u0027"><div class="movie-box" id="movie-card"><img class="back-poster" ng-src="{{baseUrl + movie.poster_path}}" /><img class="featured-poster" ng-src="{{baseUrl + movie.poster_path}}" /><div class="box-content"><h1 class="movie-title">{{movie.title}}</h1> <p class="movie-under">{{movie.release_date | date:\u0027 yyyy \u0027 }}</p> <p class="movie-undernow">{{movie.vote_average }}</p><br> <br><p class="movie-text">{{movie.overview}}</p></div></div> </div></div><a class="carousel-control-prev" href="#carouselExampleControls2" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carouselExampleControls2" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div></div></div>';
+
+        var buttonBack ="";
+        buttonBack = '<div id="innerButton"><button onclick="location.reload()" id="buttonCalc" class="button button--nina button--size-m" data-text="BACK"><span>B</span><span>A</span><span>C</span><span>K</span></button>';
+    </script>
+
+</body>
+
+</html>
